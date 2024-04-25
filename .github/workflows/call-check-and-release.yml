@@ -3,7 +3,7 @@ name: Check for update and release
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '11 * * * *'
+    - cron:  '0 2 * * *'
 
 jobs:
   call-workflow:
