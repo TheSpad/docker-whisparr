@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19
+FROM ghcr.io/linuxserver/baseimage-alpine:3.20
 
 # set version label
 ARG BUILD_DATE
@@ -11,6 +11,7 @@ LABEL maintainer="thespad"
 LABEL org.opencontainers.image.source="https://github.com/thespad/docker-whisparr"
 LABEL org.opencontainers.image.url="https://github.com/thespad/docker-whisparr"
 LABEL org.opencontainers.image.description="An adult movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new movies and will interface with clients and indexers to grab, sort, and rename them."
+LABEL org.opencontainers.image.authors="thespad"
 
 # environment settings
 ARG APP_BRANCH="nightly"
@@ -34,6 +35,7 @@ RUN \
   /tmp/whisparr.tar.gz -C \
     /app/whisparr/bin --strip-components=1 && \
   echo -e "UpdateMethod=docker\nBranch=${APP_BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=[thespad](https://github.com/thespad)" > /app/whisparr/package_info && \
+  printf "Version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /app/whisparr/bin/Whisparr.Update \
