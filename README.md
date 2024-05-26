@@ -7,9 +7,9 @@
 [![GitHub Stars](https://img.shields.io/github/stars/thespad/docker-whisparr.svg?color=26689A&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/thespad/docker-whisparr)
 [![Docker Stars](https://img.shields.io/docker/stars/thespad/whisparr.svg?color=26689A&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/thespad/whisparr)
 
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-whisparr/call-check-and-release.yml?branch=nightly&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Upstream%20Updates)](https://github.com/thespad/docker-whisparr/actions/workflows/call-check-and-release.yml)
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-whisparr/call-baseimage-update.yml?branch=nightly&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Baseimage%20Updates)](https://github.com/thespad/docker-whisparr/actions/workflows/call-baseimage-update.yml)
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-whisparr/call-build-image.yml?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-whisparr/actions/workflows/call-build-image.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-whisparr/call-check-and-release.yml?branch=nightly&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Upstream%20Updates)](https://github.com/thespad/docker-whisparr/actions/workflows/call-check-and-release.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-whisparr/call-baseimage-update.yml?branch=nightly&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Baseimage%20Updates)](https://github.com/thespad/docker-whisparr/actions/workflows/call-baseimage-update.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-whisparr/call-build-image.yml?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-whisparr/actions/workflows/call-build-image.yml)
 
 [whisparr](https://github.com/whisparr/whisparr) is an adult movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new movies and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing files in the library when a better quality format becomes available.
 
@@ -38,7 +38,6 @@ Compatible with docker-compose v2 schemas.
 
 ```yaml
 ---
-version: "2.1"
 services:
   get_iplayer:
     image: ghcr.io/thespad/whisparr:latest
@@ -48,8 +47,8 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - </path/to/appdata/config>:/config
-      - </path/to/appdata/downloads>:/downloads
+      - /path/to/whisparr/config:/config
+      - /path/to/downloads:/downloads
     ports:
       - 6969:6969
     restart: unless-stopped
@@ -64,8 +63,8 @@ docker run -d \
   -e PGID=1000 \
   -e TZ=America/New_York \
   -p 6969:6969 \
-  -v </path/to/appdata/config>:/config \
-  -v </path/to/appdata/downloads>:/downloads \
+  -v /path/to/whisparr/config:/config \
+  -v /path/to/downloads:/downloads \
   --restart unless-stopped \
   ghcr.io/thespad/whisparr:latest
 ```
@@ -89,6 +88,7 @@ Container images are configured using parameters passed at runtime (such as thos
 
 ## Versions
 
+* **26.05.24:** - Rebase to Alpine 3.20.
 * **30.12.23:** - Rebase to Alpine 3.19.
 * **14.05.23:** - Rebase to Alpine 3.18. Drop support for armhf.
 * **09.12.22:** - Rebase to 3.17.
